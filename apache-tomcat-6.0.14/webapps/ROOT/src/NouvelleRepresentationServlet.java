@@ -16,6 +16,7 @@ import java.io.IOException;
  * @version 1.0, 31/10/2007
  */
 
+@SuppressWarnings("serial")
 public class NouvelleRepresentationServlet extends HttpServlet {
 
    /**
@@ -104,7 +105,7 @@ public class NouvelleRepresentationServlet extends HttpServlet {
     */
 
     public String getServletInfo() {
-        return "Ajoute une repr�sentation � une date donn�e pour un spectacle existant";
+        return "Ajoute une representation a une date donnee pour un spectacle existant";
     }
 
 }
