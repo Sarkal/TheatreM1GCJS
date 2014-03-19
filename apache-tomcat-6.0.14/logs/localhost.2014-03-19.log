@@ -1,0 +1,74 @@
+mars 19, 2014 2:57:06 PM org.apache.catalina.core.ApplicationContext log
+Infos: La servlet NouvelleRepresentationServlet est marqué comme indisponible
+mars 19, 2014 2:57:06 PM org.apache.catalina.core.StandardWrapperValve invoke
+Grave: Exception lors de l'allocation pour la servlet NouvelleRepresentationServlet
+java.lang.Error: Unresolved compilation problems: 
+	The import javax.servlet cannot be resolved
+	The import javax.servlet cannot be resolved
+	HttpServlet cannot be resolved to a type
+	HttpServletRequest cannot be resolved to a type
+	HttpServletResponse cannot be resolved to a type
+	ServletException cannot be resolved to a type
+	ServletOutputStream cannot be resolved to a type
+	HttpServletRequest cannot be resolved to a type
+	HttpServletResponse cannot be resolved to a type
+	ServletException cannot be resolved to a type
+
+	at NouvelleRepresentationServlet.<init>(NouvelleRepresentationServlet.java:6)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at java.lang.Class.newInstance(Class.java:374)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1104)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:806)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:129)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:175)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:128)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:263)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:844)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:584)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:447)
+	at java.lang.Thread.run(Thread.java:744)
+
+mars 19, 2014 2:57:12 PM org.apache.catalina.core.ApplicationContext log
+Infos: La servlet ProgrammeServlet est marqué comme indisponible
+mars 19, 2014 2:57:12 PM org.apache.catalina.core.StandardWrapperValve invoke
+Grave: Exception lors de l'allocation pour la servlet ProgrammeServlet
+java.lang.Error: Unresolved compilation problems: 
+	The import javax.servlet cannot be resolved
+	The import javax.servlet cannot be resolved
+	HttpServlet cannot be resolved to a type
+	HttpServletRequest cannot be resolved to a type
+	HttpServletResponse cannot be resolved to a type
+	ServletException cannot be resolved to a type
+	ServletOutputStream cannot be resolved to a type
+	HttpServletRequest cannot be resolved to a type
+	HttpServletResponse cannot be resolved to a type
+	ServletException cannot be resolved to a type
+
+	at ProgrammeServlet.<init>(ProgrammeServlet.java:6)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at java.lang.Class.newInstance(Class.java:374)
+	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1104)
+	at org.apache.catalina.core.StandardWrapper.allocate(StandardWrapper.java:806)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:129)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:175)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:128)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:263)
+	at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:844)
+	at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:584)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:447)
+	at java.lang.Thread.run(Thread.java:744)
+
+mars 19, 2014 2:57:41 PM org.apache.catalina.core.StandardWrapperValve invoke
+Infos: La servlet ProgrammeServlet est actuellement indisponible
+mars 19, 2014 3:01:37 PM org.apache.catalina.core.StandardWrapperValve invoke
+Infos: La servlet ProgrammeServlet est actuellement indisponible
