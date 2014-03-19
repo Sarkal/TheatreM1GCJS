@@ -216,3 +216,9 @@ java.io.FileNotFoundException: /home/sarkal/workspace/Theatre/apache-tomcat-6.0.
 	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1590)
 	at java.lang.Thread.run(Thread.java:744)
 
+mars 19, 2014 4:31:17 PM org.apache.coyote.http11.Http11Protocol pause
+Infos: Suspension de Coyote HTTP/1.1 sur http-8080
+mars 19, 2014 4:31:18 PM org.apache.catalina.core.StandardService stop
+Infos: Arrêt du service Catalina
+mars 19, 2014 4:31:18 PM org.apache.coyote.http11.Http11Protocol destroy
+Infos: Arrêt de Coyote HTTP/1.1 sur http-8080

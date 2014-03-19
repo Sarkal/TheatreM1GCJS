@@ -3,9 +3,18 @@
  * 
  * Copyright (c) 2007 Sara Bouchenak.
  */
-import javax.servlet.*;
-import javax.servlet.http.*;
 import java.io.IOException;
+import java.sql.Connection;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import exceptions.ExceptionConnexion;
+
+import accesBD.BDConnexion;
 
 /**
  * NouvelleRepresentation Servlet.
@@ -68,6 +77,12 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 		// Transformation des parametres vers les types adequats.
 	  	// Ajout de la nouvelle representation.
 	  	// Puis construction dynamique d'une page web de reponse.
+		try {
+			Connection c = BDConnexion.getConnexion("canog", "bd2013");
+		} catch (ExceptionConnexion e) { 
+			out.println("<p>####### ECHEC ########### </p>");
+			}
+		
 	  	out.println("<p><i><font color=\"#FFFFFF\">A completer</i></p>");
 	  	out.println("<p><i><font color=\"#FFFFFF\">...</i></p>");
 	  }
