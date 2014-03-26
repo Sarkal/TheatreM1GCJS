@@ -31,12 +31,12 @@ public final class BDConnexion {
 		try {
 
 			// lecture des parametres de connexion dans connection.conf
-			Properties p = new Properties();
-			InputStream is = null;
-			is = new FileInputStream(utils.Constantes.Config);
-			p.load(is);
-			String url = p.getProperty("url");
-			String driver = p.getProperty("driver");
+//			Properties p = new Properties();
+//			InputStream is = null;
+//			is = new FileInputStream(utils.Constantes.Config);
+//			p.load(is);
+			String url = "jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:ufrima";
+			String driver = "oracle.jdbc.OracleDriver";
 			
 			Class.forName(driver);
 			// hopper@UFR, Oracle
@@ -47,8 +47,6 @@ public final class BDConnexion {
 			IO.afficherln("SQLException: " + e.getMessage());
 			IO.afficherln("SQLState: " + e.getSQLState());
 			IO.afficherln("VendorError: " + e.getErrorCode());
-		} catch (IOException e) {
-			throw new ExceptionConnexion ("fichier conf illisible \n" + e.getMessage());
 		} catch (ClassNotFoundException e) {
 			throw new ExceptionConnexion ("problème d'identification du pilote \n" + e.getMessage());
 		}

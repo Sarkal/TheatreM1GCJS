@@ -25,4 +25,8 @@ public class Categorie {
 	public void setPrix (float p) {
 		this.prix = p;
 	}
+	
+	public String toString () {
+		return categorie + " | " + prix;
+	}
 }

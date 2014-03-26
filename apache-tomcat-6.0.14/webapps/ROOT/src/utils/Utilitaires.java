@@ -1,23 +1,21 @@
 package utils;
 
-import java.util.Properties;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.util.Vector;
 import java.awt.Frame;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.Properties;
+import java.util.Vector;
 
 import jus.util.IO;
-
+import modele.Categorie;
+import modele.Utilisateur;
 import accesBD.BDCategories;
 import accesBD.BDConnexion;
-
-import modele.Utilisateur;
-import modele.Categorie;
-import exceptions.ExceptionUtilisateur;
-import exceptions.ExceptionConnexion;
 import exceptions.CategorieException;
+import exceptions.ExceptionConnexion;
+import exceptions.ExceptionUtilisateur;
 
 /**
  * les operations de l'application
@@ -82,8 +80,7 @@ public class Utilitaires {
 		login = p.getProperty("user");
 		passwd = p.getProperty("mdp");
 		if (login == null || login.equals("MYUSERNAME")) {
-			UserNamePasswordDialog login_dialog = new UserNamePasswordDialog(
-					new Frame(""));
+			UserNamePasswordDialog login_dialog = new UserNamePasswordDialog(new Frame(""));
 			login_dialog.setVisible(true);
 			login = login_dialog.getUid();
 			passwd = login_dialog.getPwd();
