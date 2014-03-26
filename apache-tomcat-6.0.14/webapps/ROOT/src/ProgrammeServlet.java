@@ -5,6 +5,7 @@
  */
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,10 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jus.util.IO;
-
 import modele.Categorie;
 import accesBD.BDConnexion;
-import exceptions.CategorieException;
 import exceptions.ExceptionConnexion;
 
 /**
@@ -48,7 +47,7 @@ public class ProgrammeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException
-			{
+	{
 		ServletOutputStream out = res.getOutputStream();   
 
 		res.setContentType("text/html");
@@ -64,16 +63,27 @@ public class ProgrammeServlet extends HttpServlet {
 			Connection c = BDConnexion.getConnexion("canog", "bd2013");
 			String requete ;
 			Statement stmt ;
-			Vector<Categorie> result = new Vector<Categorie>();
+			Vector<String> result1 = new Vector<String>();
+			
 			ResultSet rs ;
 			stmt = c.createStatement();
-			requete = "select nomc, prix from LesCategories order by nomc";
+			
+			// TODO : FIX THIS SHIT
+			
+			requete = "select distinct noms from LesSpectacles order by noms";
 			rs = stmt.executeQuery(requete);
+			out.println("<p> Nom | Datum SIZE MATTERS : " + rs.next() + "</p>");
 			while (rs.next()) {
-				result.addElement(new Categorie (rs.getString(1), rs.getFloat(2)));
+				out.println("<p> FUCKTARD </p>");
+				out.println("<p> Nom : " + rs.getString(1) + "</p>");
+				result1.addElement(new String(rs.getString(1)));
 			}
-			for (Categorie cat:result) {
-				out.println("<p>" + cat.toString() + "</p>");
+			out.println("<p> Nom | Datum SIZE MATTERS : " + result1.size() + "</p>");
+//			out.println("<p> dlkrzerjg " + result1.get(0) + " | " + result2.get(0) + "</p>");
+//			out.println("<p> dlkrzerjg " + result1.get(1) + " | " + result2.get(1) + "</p>");
+//			out.println("why don't you print this motherfucking line ?");
+			for (int i = 0; i < result1.size(); i++) {
+				out.println("<p>" + result1.get(i) + "</p>");
 			}
 		} catch (ExceptionConnexion e) {
 			out.println("<p>####### FAILURE ########### </p>");
@@ -86,7 +96,7 @@ public class ProgrammeServlet extends HttpServlet {
 		out.println("</BODY>");
 		out.close();
 
-			}
+	}
 
 	/**
 	 * HTTP POST request entry point.
