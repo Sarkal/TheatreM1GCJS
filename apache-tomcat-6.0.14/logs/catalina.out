@@ -1481,3 +1481,51 @@ mars 26, 2014 5:19:03 PM org.apache.catalina.core.StandardService stop
 Infos: Arrêt du service Catalina
 mars 26, 2014 5:19:03 PM org.apache.coyote.http11.Http11Protocol destroy
 Infos: Arrêt de Coyote HTTP/1.1 sur http-8080
+mars 30, 2014 4:03:23 PM org.apache.catalina.core.AprLifecycleListener init
+Infos: The Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/lib32:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+mars 30, 2014 4:03:23 PM org.apache.coyote.http11.Http11Protocol init
+Infos: Initialisation de Coyote HTTP/1.1 sur http-8080
+mars 30, 2014 4:03:23 PM org.apache.catalina.startup.Catalina load
+Infos: Initialization processed in 817 ms
+mars 30, 2014 4:03:23 PM org.apache.catalina.core.StandardService start
+Infos: Démarrage du service Catalina
+mars 30, 2014 4:03:23 PM org.apache.catalina.core.StandardEngine start
+Infos: Starting Servlet Engine: Apache Tomcat/6.0.14
+mars 30, 2014 4:03:24 PM org.apache.coyote.http11.Http11Protocol start
+Infos: Démarrage de Coyote HTTP/1.1 sur http-8080
+mars 30, 2014 4:03:24 PM org.apache.jk.common.ChannelSocket init
+Infos: JK: ajp13 listening on /0.0.0.0:8009
+mars 30, 2014 4:03:24 PM org.apache.jk.server.JkMain start
+Infos: Jk running ID=0 time=0/42  config=null
+mars 30, 2014 4:03:24 PM org.apache.catalina.startup.Catalina start
+Infos: Server startup in 901 ms
+Connexion impossible : Exception d'E/S: The Network Adapter could not establish the connection
+SQLException: Exception d'E/S: The Network Adapter could not establish the connection
+SQLState: null
+VendorError: 17002
+Connexion impossible : Exception d'E/S: The Network Adapter could not establish the connection
+SQLException: Exception d'E/S: The Network Adapter could not establish the connection
+SQLState: null
+VendorError: 17002
+Connexion impossible : Exception d'E/S: The Network Adapter could not establish the connection
+SQLException: Exception d'E/S: The Network Adapter could not establish the connection
+SQLState: null
+VendorError: 17002
+avr. 02, 2014 1:31:31 PM org.apache.catalina.core.AprLifecycleListener init
+Infos: The Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/lib32:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+avr. 02, 2014 1:31:31 PM org.apache.coyote.http11.Http11Protocol init
+Infos: Initialisation de Coyote HTTP/1.1 sur http-8080
+avr. 02, 2014 1:31:31 PM org.apache.catalina.startup.Catalina load
+Infos: Initialization processed in 498 ms
+avr. 02, 2014 1:31:31 PM org.apache.catalina.core.StandardService start
+Infos: Démarrage du service Catalina
+avr. 02, 2014 1:31:31 PM org.apache.catalina.core.StandardEngine start
+Infos: Starting Servlet Engine: Apache Tomcat/6.0.14
+avr. 02, 2014 1:31:31 PM org.apache.coyote.http11.Http11Protocol start
+Infos: Démarrage de Coyote HTTP/1.1 sur http-8080
+avr. 02, 2014 1:31:31 PM org.apache.jk.common.ChannelSocket init
+Infos: JK: ajp13 listening on /0.0.0.0:8009
+avr. 02, 2014 1:31:31 PM org.apache.jk.server.JkMain start
+Infos: Jk running ID=0 time=0/34  config=null
+avr. 02, 2014 1:31:31 PM org.apache.catalina.startup.Catalina start
+Infos: Server startup in 619 ms
