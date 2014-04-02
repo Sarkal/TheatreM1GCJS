@@ -68,25 +68,18 @@ public class ProgrammeServlet extends HttpServlet {
 			ResultSet rs ;
 			stmt = c.createStatement();
 			
-			// TODO : FIX THIS SHIT
-			
 			requete = "select distinct noms from LesSpectacles order by noms";
 			rs = stmt.executeQuery(requete);
-			out.println("<p> Nom | Datum SIZE MATTERS : " + rs.next() + "</p>");
+			out.println("<p> Noms : </p>");
 			while (rs.next()) {
-				out.println("<p> FUCKTARD </p>");
-				out.println("<p> Nom : " + rs.getString(1) + "</p>");
+//				out.println(rs.getString(1));
 				result1.addElement(new String(rs.getString(1)));
 			}
-			out.println("<p> Nom | Datum SIZE MATTERS : " + result1.size() + "</p>");
-//			out.println("<p> dlkrzerjg " + result1.get(0) + " | " + result2.get(0) + "</p>");
-//			out.println("<p> dlkrzerjg " + result1.get(1) + " | " + result2.get(1) + "</p>");
-//			out.println("why don't you print this motherfucking line ?");
 			for (int i = 0; i < result1.size(); i++) {
 				out.println("<p>" + result1.get(i) + "</p>");
 			}
 		} catch (ExceptionConnexion e) {
-			out.println("<p>####### FAILURE ########### </p>");
+			out.println("<p>Echec requete </p>");
 			out.println(e.getMessage());
 		} catch (SQLException e) {
 			IO.println("SQLException");
