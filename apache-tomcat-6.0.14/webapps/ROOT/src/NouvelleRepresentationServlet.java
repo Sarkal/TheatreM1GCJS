@@ -187,9 +187,6 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 				String requete, date;
 				Statement stmt;
 
-				//date = anneeS + moisS + jourS + " " + heureS + ":" + minutesS;
-				//date = anneeS + "-" + moisS + "-" + jourS;
-				
 				date = anneeS +"/" + moisS + "/" + jourS + " " + heureS + ":" + minutesS;
 				
 				stmt = c.createStatement();

@@ -72,7 +72,6 @@ public class ProgrammeServlet extends HttpServlet {
 			rs = stmt.executeQuery(requete);
 			out.println("<p> Noms : </p>");
 			while (rs.next()) {
-//				out.println(rs.getString(1));
 				result1.addElement(new String(rs.getString(1)));
 			}
 			for (int i = 0; i < result1.size(); i++) {

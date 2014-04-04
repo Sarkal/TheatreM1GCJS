@@ -23,6 +23,11 @@
 <servlet-class>NouvelleRepresentationServlet</servlet-class> 
 </servlet>
 
+- <servlet> 
+<servlet-name>ProgrammeParGroupeServlet</servlet-name> 
+<servlet-class>ProgrammeParGroupeServlet</servlet-class> 
+</servlet>
+
 
 
 
@@ -34,6 +39,11 @@
 - <servlet-mapping> 
 <servlet-name>NouvelleRepresentationServlet</servlet-name> 
 <url-pattern>/servlet/NouvelleRepresentationServlet</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>ProgrammeParGroupeServlet</servlet-name> 
+<url-pattern>/servlet/ProgrammeParGroupeServlet</url-pattern> 
 </servlet-mapping>
 
 
