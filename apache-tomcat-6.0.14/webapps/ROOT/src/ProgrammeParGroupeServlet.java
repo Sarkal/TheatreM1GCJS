@@ -58,7 +58,7 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 		numS = req.getParameter("numS");
 		
 		if (numS == null) {
-			out.println("<font color=\"#FFFFFF\">Veuillez saisir les informations relatives a la nouvelle representation :");
+			out.println("<font color=\"#FFFFFF\">Veuillez saisir le groupe 	&agrave; afficher :");
 			out.println("<P>");
 			out.print("<form action=\"");
 			out.print("ProgrammeParGroupeServlet\" ");
