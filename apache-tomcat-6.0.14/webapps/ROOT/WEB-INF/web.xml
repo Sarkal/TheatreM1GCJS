@@ -28,6 +28,11 @@
 <servlet-class>ProgrammeParGroupeServlet</servlet-class> 
 </servlet>
 
+- <servlet> 
+<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<servlet-class>PlacesDisponiblesParRepresentation</servlet-class> 
+</servlet>
+
 
 
 
@@ -44,6 +49,11 @@
 - <servlet-mapping> 
 <servlet-name>ProgrammeParGroupeServlet</servlet-name> 
 <url-pattern>/servlet/ProgrammeParGroupeServlet</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<url-pattern>/servlet/PlacesDisponiblesParRepresentation</url-pattern> 
 </servlet-mapping>
 
 

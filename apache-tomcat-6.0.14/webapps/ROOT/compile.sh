@@ -10,3 +10,5 @@ javac -d $DEST -sourcepath src -classpath $LIB $CATALINA_HOME/webapps/ROOT/src/N
 javac -d $DEST -sourcepath src -classpath $LIB $CATALINA_HOME/webapps/ROOT/src/ProgrammeServlet.java
 
 javac -d $DEST -sourcepath src -classpath $LIB $CATALINA_HOME/webapps/ROOT/src/ProgrammeParGroupeServlet.java
+
+javac -d $DEST -sourcepath src -classpath $LIB $CATALINA_HOME/webapps/ROOT/src/PlacesDisponiblesParRepresentation.java

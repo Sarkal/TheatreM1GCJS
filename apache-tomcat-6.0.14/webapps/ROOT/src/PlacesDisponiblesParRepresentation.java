@@ -18,7 +18,7 @@ import exceptions.ExceptionConnexion;
 
 
 @SuppressWarnings("serial")
-public class ProgrammeParGroupeServlet extends HttpServlet {
+public class PlacesDisponiblesParRepresentation extends HttpServlet {
 
 	/**
 	 * HTTP GET request entry point.
@@ -38,7 +38,8 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String numS, nomS;
+		String nomS, dateRep, representation;
+		String [] tab;
 		ServletOutputStream out;
 		GregorianCalendar gc;
 		int year;
@@ -50,17 +51,17 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 
 		res.setContentType("text/html");
 
-		out.println("<HEAD><TITLE> Consulter la liste des repr&eacute;sentations d'un groupe </TITLE></HEAD>");
+		out.println("<HEAD><TITLE> Consulter la liste des places disponibles pour une repr&eacute;sentations </TITLE></HEAD>");
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
-		out.println("<font color=\"#FFFFFF\"><h1> Programme par groupe </h1>");
+		out.println("<font color=\"#FFFFFF\"><h1> Places disponibles </h1>");
 
-		numS = req.getParameter("numS");
+		representation = req.getParameter("representation");
 		
-		if (numS == null) {
-			out.println("<font color=\"#FFFFFF\">Veuillez saisir le groupe 	&agrave; afficher :");
+		if (representation == null) {
+			out.println("<font color=\"#FFFFFF\"> Choisir la repr&eacute;sentation :");
 			out.println("<P>");
 			out.print("<form action=\"");
-			out.print("ProgrammeParGroupeServlet\" ");
+			out.print("PlacesDisponiblesParRepresentation\" ");
 			out.println("method=POST>");
 
 			Connection c = null;
@@ -71,15 +72,14 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 
 				ResultSet rs ;
 				stmt = c.createStatement();
-
-				requete = "select distinct numS, nomS from LesSpectacles order by numS";
+				requete = "select nomS, dateRep from LesRepresentations natural join LesSpectacles";
 				rs = stmt.executeQuery(requete);
-				out.println("<SELECT name=\"numS\">");
+				out.println("<SELECT name=\"representation\">");
 				while (rs.next()) {
-					numS = rs.getString(1);
-					nomS = rs.getString(2);
-					out.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
-					IO.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
+					nomS = rs.getString(1);
+					dateRep = rs.getString(2);
+					out.println("<option value=\""+ nomS +"::"+ dateRep +"\"> "+ nomS +" - "+ dateRep +"</option>");
+					IO.println("<option value=\""+ nomS +"::"+ dateRep +"\"> "+ nomS +" - "+ nomS +"</option>");
 				}
 				out.println("</SELECT>");
 				
@@ -110,14 +110,21 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				Statement stmt;
 				ResultSet rs;
 
+				tab = representation.split("::");
+				nomS = tab[0];
+				dateRep = tab[1];
+				
+				out.println("Paces pour "+ nomS +" le "+ dateRep);
 				stmt = c.createStatement();
-				requete = "select dateRep from LesRepresentations where (numS = "+ numS +")";
+				requete = "select * from LesRepresentations";
 
 				rs = stmt.executeQuery(requete);
-				
+				// TODO requete SQL
+				/*
 				while (rs.next()) {
 					out.println("<p>" + rs.getString(1) + "</p>");
 				}
+				*/
 			} catch (NullPointerException e){
 				out.println("<p>Null pointer exception, check connection</p>");
 			} catch (ExceptionConnexion e) {
