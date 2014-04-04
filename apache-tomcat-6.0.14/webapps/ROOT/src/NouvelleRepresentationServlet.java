@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -53,7 +52,7 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String numS, jourS, moisS, anneeS, heureS, minutesS;
+		String numS, nomS, jourS, moisS, anneeS, heureS, minutesS;
 		ServletOutputStream out;
 		GregorianCalendar gc;
 		int year;
@@ -100,11 +99,14 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 				ResultSet rs ;
 				stmt = c.createStatement();
 
-				requete = "select distinct numS from LesSpectacles order by noms";
+				requete = "select distinct numS, nomS from LesSpectacles order by numS";
 				rs = stmt.executeQuery(requete);
 				out.println("<SELECT name=\"numS\">");
 				while (rs.next()) {
-					out.println("<OPTION>"+rs.getString(1));
+					numS = rs.getString(1);
+					nomS = rs.getString(2);
+					out.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
+					IO.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
 				}
 				out.println("</SELECT>");
 				
@@ -179,21 +181,6 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 			out.println("</form>");
 
 		} else {
-			// TODO
-			// Transformation des parametres vers les types adequats.
-			// Ajout de la nouvelle representation.
-			// Puis construction dynamique d'une page web de reponse.
-			/*
-create table LesRepresentations (
-	numS number (4)
-	dateRep date
-
-	constraint rep_c1 primary key (numS, dateRep),
-	constraint rep_c2 foreign key (numS) references LesSpectacles (numS)
-
-	INSERT INTO "nom de table" ("colonne 1", "colonne 2", ...)
-VALUES ("valeur 1", "valeur 2", ...);
-			 */
 			Connection c = null;
 			try {
 				c = BDConnexion.getConnexion("canog", "bd2013");
