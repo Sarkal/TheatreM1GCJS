@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+   version="2.5">
+
+  <display-name>Servlets</display-name>
+  <description> Servlets </description>- 
+
+<!-- 
+ Define servlets that are included in the Theater application 
+--> 
+
+
+- <servlet> 
+<servlet-name>ProgrammeServlet</servlet-name> 
+<servlet-class>ProgrammeServlet</servlet-class> 
+</servlet>
+
+- <servlet> 
+<servlet-name>NouvelleRepresentationServlet</servlet-name> 
+<servlet-class>NouvelleRepresentationServlet</servlet-class> 
+</servlet>
+
+
+
+
+- <servlet-mapping> 
+<servlet-name>ProgrammeServlet</servlet-name> 
+<url-pattern>/servlet/ProgrammeServlet</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>NouvelleRepresentationServlet</servlet-name> 
+<url-pattern>/servlet/NouvelleRepresentationServlet</url-pattern> 
+</servlet-mapping>
+
+
+</web-app>

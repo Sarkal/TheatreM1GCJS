@@ -1,0 +1,7 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+*.log
+/TheatreM1GCJS/nbproject/private/
