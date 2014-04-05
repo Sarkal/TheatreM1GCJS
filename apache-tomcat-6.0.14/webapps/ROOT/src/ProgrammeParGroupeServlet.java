@@ -3,8 +3,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -40,13 +38,9 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String numS, nomS;
 		ServletOutputStream out;
-		GregorianCalendar gc;
-		int year;
 
 		
 		out = res.getOutputStream();
-		gc = new GregorianCalendar();
-		year = gc.get(Calendar.YEAR);
 
 		res.setContentType("text/html");
 

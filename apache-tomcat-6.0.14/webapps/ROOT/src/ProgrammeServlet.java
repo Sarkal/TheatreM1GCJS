@@ -5,7 +5,6 @@
  */
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jus.util.IO;
-import modele.Categorie;
 import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
 
@@ -31,6 +29,7 @@ import exceptions.ExceptionConnexion;
  * @version 1.0, 31/10/2007
  */
 
+@SuppressWarnings("serial")
 public class ProgrammeServlet extends HttpServlet {
 
 	/**
