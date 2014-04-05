@@ -34,7 +34,7 @@
 </servlet>
 
 - <servlet> 
-<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<servlet-name>Reservation</servlet-name> 
 <servlet-class>Reservation</servlet-class> 
 </servlet>
 
@@ -62,7 +62,7 @@
 </servlet-mapping>
 
 - <servlet-mapping> 
-<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<servlet-name>Reservation</servlet-name> 
 <url-pattern>/servlet/Reservation</url-pattern> 
 </servlet-mapping>
 
