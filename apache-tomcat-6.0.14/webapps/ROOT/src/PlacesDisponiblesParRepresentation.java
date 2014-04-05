@@ -39,16 +39,11 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String nomS, numS, dateRep, representation;
+		String nomS, numS, dateRep, representation, noPlace, noRang;
 		String [] tab;
 		ServletOutputStream out;
-		GregorianCalendar gc;
-		int year;
 
-		
 		out = res.getOutputStream();
-		gc = new GregorianCalendar();
-		year = gc.get(Calendar.YEAR);
 
 		res.setContentType("text/html");
 
@@ -120,17 +115,14 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				stmt = c.createStatement();
 				requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
 						" from LesTickets where (numS = "+ numS +
-						" AND dateRep = TO_CHAR('"+ dateRep +"', "+ format +"))";
+						" AND dateRep = TO_DATE('"+ dateRep +"', "+ format +"))";
 
-				out.println("<p>requete = " + requete + "</p>");
-				
 				rs = stmt.executeQuery(requete);
-				// TODO requete SQL
-				/*
 				while (rs.next()) {
-					out.println("<p>" + rs.getString(1) + "</p>");
+					noPlace = rs.getString(1);
+					noRang = rs.getString(2);
+					out.println("<p>place "+ noPlace +" / rang "+ noRang +"</p>");
 				}
-				*/
 			} catch (NullPointerException e){
 				out.println("<p>Null pointer exception, check connection</p>");
 			} catch (ExceptionConnexion e) {
