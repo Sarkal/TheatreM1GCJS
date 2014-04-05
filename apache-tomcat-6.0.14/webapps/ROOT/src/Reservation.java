@@ -56,7 +56,7 @@ public class Reservation extends HttpServlet {
 			out.println("<font color=\"#FFFFFF\"> Choisir la repr&eacute;sentation :");
 			out.println("<P>");
 			out.print("<form action=\"");
-			out.print("PlacesDisponiblesParRepresentation\" ");
+			out.print("Reservation\" ");
 			out.println("method=POST>");
 
 			Connection c = null;
@@ -69,37 +69,53 @@ public class Reservation extends HttpServlet {
 				stmt = c.createStatement();
 				requete = "select nomS, numS, TO_CHAR(dateRep, "+ format +") from LesRepresentations natural join LesSpectacles";
 				rs = stmt.executeQuery(requete);
-				out.println("<SELECT name=\"representation\">");
+				out.println("<select name=\"representation\">");
 				while (rs.next()) {
 					nomS = rs.getString(1);
 					numS = rs.getString(2);
 					dateRep = rs.getString(3);
-					out.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ dateRep +"</option>");
-					IO.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ nomS +"</option>");
+					out.println("<option value=\""+ numS +"::"+ dateRep + "::"+ nomS +"\"> "+ nomS +" - "+ dateRep +"</option>");
 				}
-				out.println("</SELECT>");
+				out.println("</select>");
 				
-				if (place == null) {
+				if (place == null && representation != null) {
 					tab = representation.split("::");
 					numS = tab[0];
 					dateRep = tab[1];
+					nomS = tab[2];
 					
-					out.println("Paces pour le spectacle "+ numS +" le "+ dateRep);
-					stmt = c.createStatement();
+ 					stmt = c.createStatement();
 					requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
 							" from LesTickets where (numS = "+ numS +
 							" AND dateRep = TO_DATE('"+ dateRep +"', "+ format +"))";
 
 					rs = stmt.executeQuery(requete);
+					
+					
+					out.println("<br />");
+					out.println("<input type=submit>");
+					out.println("</form>");
+					
+					
+					out.print("<form action=\"");
+					out.print("Reservation\" ");
+					out.println("method=POST>");
+					
+					out.println("<p>Choix de la place pour "+ nomS +" - "+ dateRep +"</p>");
+					out.println("<INPUT type=\"hidden\" value=\""+ representation +"\" name=\"representation\">");
+					
+					out.println("<select name=\"place\">");
 					while (rs.next()) {
 						noPlace = rs.getString(1);
 						noRang = rs.getString(2);
-						out.println("<p>place "+ noPlace +" / rang "+ noRang +"</p>");
+						out.println("<option value=\""+ noPlace +"::"+ noRang +"\"> place "+ noPlace +" - rang "+ noRang +"</option>");
 					}
+					out.println("</select>");
 				}
 				
 			} catch (NullPointerException e){
 				out.println("Null pointer exception, check connection");
+				out.println(e.getMessage());
 			} catch (ExceptionConnexion e) {
 				out.println("<p>Echec requete </p>");
 				out.println(e.getMessage());
@@ -119,30 +135,90 @@ public class Reservation extends HttpServlet {
 			out.println("</form>");
 
 		} else {
-//			Connection c = null;
-//			try {
-//				c = BDConnexion.getConnexion("canog", "bd2013");
-//				String requete;
-//				Statement stmt;
-//				ResultSet rs;
-//
-//				
-//			} catch (NullPointerException e){
-//				out.println("<p>Null pointer exception, check connection</p>");
-//			} catch (ExceptionConnexion e) {
-//				out.println("<p>Echec requete </p>");
-//				out.println(e.getMessage());
-//			} catch (SQLException e) {
-//				out.println("SQLException");
-//				out.println(e.getMessage());
-//			} finally {
-//				if (c != null)
-//					try {
-//						c.close();
-//					} catch (SQLException e) {
-//						IO.println("SQLException");
-//					}
-//			}
+			tab = representation.split("::");
+			numS = tab[0];
+			dateRep = tab[1];
+			nomS = tab[2];
+			
+			tab = place.split("::");
+			noRang = tab[0];
+			noPlace = tab[1];
+			
+			Connection c = null;
+			String noS, noD, prix;
+			int noSerie, noDossier;
+			try {
+				c = BDConnexion.getConnexion("canog", "bd2013");
+				String requete;
+				Statement stmt;
+				ResultSet rs;
+				
+				// on recupere le numero de serie le plus grand pour avoir le suivant
+				stmt = c.createStatement();
+				requete = "select max(noSerie) from lesTickets";
+				rs = stmt.executeQuery(requete);
+				rs.next();
+				noS = rs.getString(1);
+				noSerie = Integer.parseInt(noS);
+				noSerie++;
+				
+				
+				// idem pour le noDossier
+				stmt = c.createStatement();
+				requete = "select max(noDossier) from LesDossiers";
+				rs = stmt.executeQuery(requete);
+				rs.next();
+				noD = rs.getString(1);
+				noDossier = Integer.parseInt(noD);
+				noDossier++;
+				
+				// on recupere le pris de la place voulue
+				stmt = c.createStatement();
+				requete = "select prix from LesCategories where nomC in (" +
+						"select nomC from LesZones where numZ in (" +
+						"select numZ from lesPlaces where (noPlace = 1 AND noRang = 1) ))";
+				rs = stmt.executeQuery(requete);
+				rs.next();
+				prix = rs.getString(1);
+				
+				
+				// on ajoute le dossier dans la base
+				stmt = c.createStatement();
+				requete = "INSERT INTO LesDossiers VALUES ('" + 
+						noDossier +"', '"+ prix +"')";
+				stmt.executeQuery(requete);
+				
+				
+				// on ajoute le nouveau ticket dans la base
+				stmt = c.createStatement();
+				requete = "INSERT INTO LesTickets VALUES ('" + noSerie +
+						"', '"+ numS +"', TO_DATE('" + dateRep +
+						"', 'yyyy/mm/dd hh24:mi'), '"+ noPlace +"', '"+ noRang +"', " +
+						"SYSDATE, '"+ noDossier +"')";
+				stmt.executeQuery(requete);
+				
+				c.commit();
+				
+				out.println("<p>Place " + noPlace + " rang "+ noRang +" réservee avec succès pour le concert de "+ nomS +" le " + dateRep +"</p>");
+				
+				
+			} catch (NullPointerException e){
+				out.println("Null pointer exception, check connection");
+				out.println(e.getMessage());
+			} catch (ExceptionConnexion e) {
+				out.println("<p>Echec requete </p>");
+				out.println(e.getMessage());
+			} catch (SQLException e) {
+				IO.println("SQLException");
+				out.println(e.getMessage());
+			} finally {
+				if (c != null)
+					try {
+						c.close();
+					} catch (SQLException e) {
+						IO.println("SQLException");
+					}
+			}
 		}
 
 		out.println("<hr><p><font color=\"#FFFFFF\"><a href=\"/admin/admin.html\">Page d'administration</a></p>");

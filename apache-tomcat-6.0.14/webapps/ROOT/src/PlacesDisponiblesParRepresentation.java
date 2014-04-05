@@ -73,8 +73,7 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 					nomS = rs.getString(1);
 					numS = rs.getString(2);
 					dateRep = rs.getString(3);
-					out.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ dateRep +"</option>");
-					IO.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ nomS +"</option>");
+					out.println("<option value=\""+ numS +"::"+ dateRep +"::"+ nomS +"\"> "+ nomS +" - "+ dateRep +"</option>");
 				}
 				out.println("</SELECT>");
 				
@@ -108,8 +107,9 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				tab = representation.split("::");
 				numS = tab[0];
 				dateRep = tab[1];
+				nomS = tab[2];
 				
-				out.println("Paces pour le spectacle "+ numS +" le "+ dateRep);
+				out.println("Paces pour le spectacle de "+ nomS +" le "+ dateRep);
 				stmt = c.createStatement();
 				requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
 						" from LesTickets where (numS = "+ numS +
