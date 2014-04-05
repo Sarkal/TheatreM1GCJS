@@ -19,6 +19,7 @@ import exceptions.ExceptionConnexion;
 
 @SuppressWarnings("serial")
 public class PlacesDisponiblesParRepresentation extends HttpServlet {
+	private static final String format = "'yyyy/mm/dd HH24:MI'";
 
 	/**
 	 * HTTP GET request entry point.
@@ -38,7 +39,7 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String nomS, dateRep, representation;
+		String nomS, numS, dateRep, representation;
 		String [] tab;
 		ServletOutputStream out;
 		GregorianCalendar gc;
@@ -72,14 +73,15 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 
 				ResultSet rs ;
 				stmt = c.createStatement();
-				requete = "select nomS, dateRep from LesRepresentations natural join LesSpectacles";
+				requete = "select nomS, numS, TO_CHAR(dateRep, "+ format +") from LesRepresentations natural join LesSpectacles";
 				rs = stmt.executeQuery(requete);
 				out.println("<SELECT name=\"representation\">");
 				while (rs.next()) {
 					nomS = rs.getString(1);
-					dateRep = rs.getString(2);
-					out.println("<option value=\""+ nomS +"::"+ dateRep +"\"> "+ nomS +" - "+ dateRep +"</option>");
-					IO.println("<option value=\""+ nomS +"::"+ dateRep +"\"> "+ nomS +" - "+ nomS +"</option>");
+					numS = rs.getString(2);
+					dateRep = rs.getString(3);
+					out.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ dateRep +"</option>");
+					IO.println("<option value=\""+ numS +"::"+ dateRep +"\"> "+ nomS +" - "+ nomS +"</option>");
 				}
 				out.println("</SELECT>");
 				
@@ -111,13 +113,17 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				ResultSet rs;
 
 				tab = representation.split("::");
-				nomS = tab[0];
+				numS = tab[0];
 				dateRep = tab[1];
 				
-				out.println("Paces pour "+ nomS +" le "+ dateRep);
+				out.println("Paces pour le spectacle "+ numS +" le "+ dateRep);
 				stmt = c.createStatement();
-				requete = "select * from LesRepresentations";
+				requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
+						" from LesTickets where (numS = "+ numS +
+						" AND dateRep = TO_CHAR('"+ dateRep +"', "+ format +"))";
 
+				out.println("<p>requete = " + requete + "</p>");
+				
 				rs = stmt.executeQuery(requete);
 				// TODO requete SQL
 				/*
