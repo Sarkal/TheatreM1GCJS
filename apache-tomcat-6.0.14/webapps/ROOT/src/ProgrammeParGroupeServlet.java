@@ -37,7 +37,7 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String numS, nomS, dateRep;
+		String numS, nomS, dateRep, representation;
 		ServletOutputStream out;
 		int nbRepresentations = 0;
 		
@@ -111,18 +111,37 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				rs.next();
 				nomS = rs.getString(1);
 				
+				out.println("<p>Programmes du groupe "+ nomS +"</p>");
+				
 				// et les dates de représentation
 				stmt = c.createStatement();
 				requete = "select TO_CHAR(dateRep, "+ format +") from LesRepresentations where (numS = "+ numS +")";
 				rs = stmt.executeQuery(requete);
 				
+				out.println("<table>");
 				while (rs.next()) {
 					dateRep = rs.getString(1);
+					representation = numS +"::"+ dateRep +"::"+ nomS;
+					
+					out.println("<tr>");
+					out.println("<th>");
 					out.println("<p><a href=\"/servlet/PlacesDisponiblesParRepresentation?"+
-							"representation="+ numS +"::"+ dateRep +"::"+ nomS +
-							"\">"+ dateRep +"</a></p>");
+							"representation="+ representation +
+							"\">"+ dateRep +"</a>");
+					out.println("</th>");
+					out.println("<th>");
+					out.println("<form action=\"Reservation\" method=POST>");
+					out.println("<input type=\"hidden\" value=\""+ representation +"\" name=\"representation\">");
+					out.println("<input type=submit value=\"Réserver\">");
+					out.println("</form></p>");
+					out.println("<th>");
+					out.println("</tr>");
+					//numS::dateRep::nomS
+					
 					nbRepresentations++;
 				}
+				out.println("</table>");
+				
 				if (nbRepresentations == 0) {
 					out.println("<p> Aucune représentation de programmée</p>");
 				}
