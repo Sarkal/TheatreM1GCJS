@@ -3,9 +3,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import exceptions.ExceptionConnexion;
 @SuppressWarnings("serial")
 public class Reservation extends HttpServlet {
 	private static final String format = "'yyyy/mm/dd HH24:MI'";
+	Cookie cookie = null;
 
 	/**
 	 * HTTP GET request entry point.
@@ -37,10 +40,12 @@ public class Reservation extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
+		Random rand;
 		String nomS, numS, dateRep, representation, place, noPlace, noRang;
 		String [] tab;
 		ServletOutputStream out;
 
+		rand = new Random();
 		out = res.getOutputStream();
 
 		res.setContentType("text/html");
@@ -49,6 +54,13 @@ public class Reservation extends HttpServlet {
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
 		out.println("<font color=\"#FFFFFF\"><h1> Places disponibles </h1>");
 
+		if (cookie == null) {
+			cookie = new Cookie("idClient", ""+rand.nextInt(Integer.MAX_VALUE));
+			out.print("Cookie cree");
+		}
+		else
+			out.print("Cookie = " + cookie.getValue());
+		
 		representation = req.getParameter("representation");
 		place = req.getParameter("place");
 		
@@ -115,7 +127,6 @@ public class Reservation extends HttpServlet {
 				
 			} catch (NullPointerException e){
 				out.println("Null pointer exception, check connection");
-				out.println(e.getMessage());
 			} catch (ExceptionConnexion e) {
 				out.println("<p>Echec requete </p>");
 				out.println(e.getMessage());
