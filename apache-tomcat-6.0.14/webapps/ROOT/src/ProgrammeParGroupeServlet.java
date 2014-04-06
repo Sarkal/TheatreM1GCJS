@@ -38,7 +38,7 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String numS, nomS;
 		ServletOutputStream out;
-
+		int nbRepresentations = 0;
 		
 		out = res.getOutputStream();
 
@@ -73,7 +73,6 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 					numS = rs.getString(1);
 					nomS = rs.getString(2);
 					out.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
-					IO.println("<option value=\""+ numS +"\"> "+ numS +" - "+ nomS +"</option>");
 				}
 				out.println("</SELECT>");
 				
@@ -111,6 +110,10 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				
 				while (rs.next()) {
 					out.println("<p>" + rs.getString(1) + "</p>");
+					nbRepresentations++;
+				}
+				if (nbRepresentations == 0) {
+					out.println("<p> Aucune représentation de programmée</p>");
 				}
 			} catch (NullPointerException e){
 				out.println("<p>Null pointer exception, check connection</p>");

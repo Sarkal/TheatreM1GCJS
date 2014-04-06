@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -47,7 +46,8 @@ public class ProgrammeServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException
 	{
-		ServletOutputStream out = res.getOutputStream();   
+		ServletOutputStream out = res.getOutputStream();
+		String nomS, numS;
 
 		res.setContentType("text/html");
 
@@ -62,19 +62,18 @@ public class ProgrammeServlet extends HttpServlet {
 			Connection c = BDConnexion.getConnexion("canog", "bd2013");
 			String requete ;
 			Statement stmt ;
-			Vector<String> result1 = new Vector<String>();
 			
 			ResultSet rs ;
 			stmt = c.createStatement();
 			
-			requete = "select distinct noms from LesSpectacles order by noms";
+			requete = "select distinct nomS, numS from LesSpectacles order by noms";
 			rs = stmt.executeQuery(requete);
 			out.println("<p> Noms : </p>");
 			while (rs.next()) {
-				result1.addElement(new String(rs.getString(1)));
-			}
-			for (int i = 0; i < result1.size(); i++) {
-				out.println("<p>" + result1.get(i) + "</p>");
+				nomS = rs.getString(1);
+				numS = rs.getString(2);
+				out.println("<p><a href=\"/servlet/ProgrammeParGroupeServlet?numS="
+						+ numS+"\">"+ numS +" - "+ nomS +"</a></p>");
 			}
 		} catch (ExceptionConnexion e) {
 			out.println("<p>Echec requete </p>");
