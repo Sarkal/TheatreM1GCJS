@@ -2391,3 +2391,21 @@ java.lang.NullPointerException
 	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:413)
 4 avr. 2014 11:22:11 org.apache.coyote.http11.Http11Protocol destroy
 INFO: Arrêt de Coyote HTTP/1.1 sur http-8080
+avr. 06, 2014 4:08:59 PM org.apache.catalina.core.AprLifecycleListener init
+Infos: The Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+avr. 06, 2014 4:08:59 PM org.apache.coyote.http11.Http11Protocol init
+Infos: Initialisation de Coyote HTTP/1.1 sur http-8080
+avr. 06, 2014 4:08:59 PM org.apache.catalina.startup.Catalina load
+Infos: Initialization processed in 390 ms
+avr. 06, 2014 4:08:59 PM org.apache.catalina.core.StandardService start
+Infos: Démarrage du service Catalina
+avr. 06, 2014 4:08:59 PM org.apache.catalina.core.StandardEngine start
+Infos: Starting Servlet Engine: Apache Tomcat/6.0.14
+avr. 06, 2014 4:08:59 PM org.apache.coyote.http11.Http11Protocol start
+Infos: Démarrage de Coyote HTTP/1.1 sur http-8080
+avr. 06, 2014 4:08:59 PM org.apache.jk.common.ChannelSocket init
+Infos: JK: ajp13 listening on /0.0.0.0:8009
+avr. 06, 2014 4:08:59 PM org.apache.jk.server.JkMain start
+Infos: Jk running ID=0 time=0/21  config=null
+avr. 06, 2014 4:08:59 PM org.apache.catalina.startup.Catalina start
+Infos: Server startup in 365 ms
