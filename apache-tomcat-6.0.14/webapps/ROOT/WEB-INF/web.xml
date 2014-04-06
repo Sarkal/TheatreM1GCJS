@@ -11,12 +11,14 @@
     <web-resource-name>
       Entire Application
     </web-resource-name>
-    <url-pattern>/admin/*</url-pattern>
+    <url-pattern>/admin/admin.html</url-pattern>
+    <url-pattern>/servlet/NouvelleRepresentationServlet</url-pattern>
   </web-resource-collection>
   <auth-constraint>
       <role-name>admin</role-name>
   </auth-constraint>
 </security-constraint>
+
 <login-config>
   <auth-method>BASIC</auth-method>
   <realm-name>Admin only area</realm-name>
