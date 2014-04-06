@@ -20,7 +20,6 @@ import exceptions.ExceptionConnexion;
 @SuppressWarnings("serial")
 public class Reservation extends HttpServlet {
 	private static final String format = "'yyyy/mm/dd HH24:MI'";
-	Cookie cookie = null;
 
 	/**
 	 * HTTP GET request entry point.
@@ -40,12 +39,10 @@ public class Reservation extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		Random rand;
 		String nomS, numS, dateRep, representation, place, noPlace, noRang;
 		String [] tab;
 		ServletOutputStream out;
 
-		rand = new Random();
 		out = res.getOutputStream();
 
 		res.setContentType("text/html");
@@ -54,13 +51,6 @@ public class Reservation extends HttpServlet {
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
 		out.println("<font color=\"#FFFFFF\"><h1> Places disponibles </h1>");
 
-		if (cookie == null) {
-			cookie = new Cookie("idClient", ""+rand.nextInt(Integer.MAX_VALUE));
-			out.print("Cookie cree");
-		}
-		else
-			out.print("Cookie = " + cookie.getValue());
-		
 		representation = req.getParameter("representation");
 		place = req.getParameter("place");
 		
