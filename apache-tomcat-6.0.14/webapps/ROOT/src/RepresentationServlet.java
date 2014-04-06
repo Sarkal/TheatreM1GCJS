@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +15,8 @@ import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
 
 
-public class RepresentationServlet {
+@SuppressWarnings("serial")
+public class RepresentationServlet extends HttpServlet {
 	/**
 	 * HTTP GET request entry point.
 	 * 
@@ -33,12 +35,22 @@ public class RepresentationServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		Connection c = null;
-		ServletOutputStream out;
-		out = res.getOutputStream();
+		ServletOutputStream out = res.getOutputStream();
+		Connection c;
+
+		res.setContentType("text/html");
+
+		out.println("<HEAD><TITLE> Programme de la saison </TITLE></HEAD>");
+		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
+		out.println("<font color=\"#FFFFFF\"><h1> Programme de la saison </h1>");
+
+		// TODO
+		// Recuperation de la liste de tous les spectacles de la saison.
+		// Puis construction dynamique d'une page web decrivant ces spectacles.
+		c = null;
 		try {
 			c = BDConnexion.getConnexion("canog", "bd2013");
-			String requete, date;
+			String requete;
 			Statement stmt;
 			ResultSet rs ;
 
@@ -88,10 +100,9 @@ public class RepresentationServlet {
 	 *					   when the servlet handles the POST request
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException
-			{
+			throws ServletException, IOException {
 		doGet(req, res);
-			}
+	}
 
 
 	/**

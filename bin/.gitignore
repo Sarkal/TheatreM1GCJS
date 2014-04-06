@@ -1,7 +1,7 @@
 *.class
-
+*~
 # Package Files #
 *.war
 *.ear
 *.log
-/TheatreM1GCJS/nbproject/private/
+apache-tomcat-6.0.14/logs/*

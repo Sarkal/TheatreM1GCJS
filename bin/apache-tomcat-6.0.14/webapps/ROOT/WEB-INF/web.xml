@@ -23,6 +23,26 @@
 <servlet-class>NouvelleRepresentationServlet</servlet-class> 
 </servlet>
 
+- <servlet> 
+<servlet-name>ProgrammeParGroupeServlet</servlet-name> 
+<servlet-class>ProgrammeParGroupeServlet</servlet-class> 
+</servlet>
+
+- <servlet> 
+<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<servlet-class>PlacesDisponiblesParRepresentation</servlet-class> 
+</servlet>
+
+- <servlet> 
+<servlet-name>RepresentationServlet</servlet-name> 
+<servlet-class>RepresentationServlet</servlet-class> 
+</servlet>
+
+- <servlet> 
+<servlet-name>Reservation</servlet-name> 
+<servlet-class>Reservation</servlet-class> 
+</servlet>
+
 
 
 
@@ -36,5 +56,24 @@
 <url-pattern>/servlet/NouvelleRepresentationServlet</url-pattern> 
 </servlet-mapping>
 
+- <servlet-mapping> 
+<servlet-name>ProgrammeParGroupeServlet</servlet-name> 
+<url-pattern>/servlet/ProgrammeParGroupeServlet</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>PlacesDisponiblesParRepresentation</servlet-name> 
+<url-pattern>/servlet/PlacesDisponiblesParRepresentation</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>RepresentationServlet</servlet-name> 
+<url-pattern>/servlet/RepresentationServlet</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>Reservation</servlet-name> 
+<url-pattern>/servlet/Reservation</url-pattern> 
+</servlet-mapping>
 
 </web-app>
