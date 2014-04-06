@@ -109,7 +109,9 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				dateRep = tab[1];
 				nomS = tab[2];
 				
-				out.println("Paces pour le spectacle de "+ nomS +" le "+ dateRep);
+				
+				
+				out.println("<p>Paces pour le spectacle de "+ nomS +" le "+ dateRep +"</p>");
 				stmt = c.createStatement();
 				requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
 						" from LesTickets where (numS = "+ numS +

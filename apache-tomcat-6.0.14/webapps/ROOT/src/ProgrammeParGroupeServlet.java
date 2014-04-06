@@ -17,6 +17,7 @@ import exceptions.ExceptionConnexion;
 
 @SuppressWarnings("serial")
 public class ProgrammeParGroupeServlet extends HttpServlet {
+	private static final String format = "'yyyy/mm/dd HH24:MI'";
 
 	/**
 	 * HTTP GET request entry point.
@@ -36,7 +37,7 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
-		String numS, nomS;
+		String numS, nomS, dateRep;
 		ServletOutputStream out;
 		int nbRepresentations = 0;
 		
@@ -103,13 +104,23 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				Statement stmt;
 				ResultSet rs;
 
+				// on récupère le nom du groupe
 				stmt = c.createStatement();
-				requete = "select dateRep from LesRepresentations where (numS = "+ numS +")";
-
+				requete = "select nomS from LesSpectacles where (numS = "+ numS +")";
+				rs = stmt.executeQuery(requete);
+				rs.next();
+				nomS = rs.getString(1);
+				
+				// et les dates de représentation
+				stmt = c.createStatement();
+				requete = "select TO_CHAR(dateRep, "+ format +") from LesRepresentations where (numS = "+ numS +")";
 				rs = stmt.executeQuery(requete);
 				
 				while (rs.next()) {
-					out.println("<p>" + rs.getString(1) + "</p>");
+					dateRep = rs.getString(1);
+					out.println("<p><a href=\"/servlet/PlacesDisponiblesParRepresentation?"+
+							"representation="+ numS +"::"+ dateRep +"::"+ nomS +
+							"\">"+ dateRep +"</a></p>");
 					nbRepresentations++;
 				}
 				if (nbRepresentations == 0) {
