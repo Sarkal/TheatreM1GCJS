@@ -1,3 +1,4 @@
+drop table LesCaddies ;
 drop table LesTickets ; 
 drop table LesDossiers;
 drop table LesRepresentations ; 
@@ -43,3 +44,12 @@ create table LesTickets (noSerie number (4), numS number (4),
       constraint tickets_c6 foreign key (noDossier)  
                  references LesDossiers (noDossier)
 ) ; 
+
+create table LesCaddies (idClient number, nomS varchar2(40), numS number (4),
+		dateRep date, noPlace number (4), noRang number (4),
+      constraint caddies_c1 primary key (numS, dateRep, noPlace, noRang), 
+      constraint caddies_c2 foreign key (numS,dateRep)
+                 references LesRepresentations (numS,dateRep),
+      constraint caddies_c3 foreign key (noPlace,noRang)  
+                 references LesPlaces (noPlace,noRang)
+);
