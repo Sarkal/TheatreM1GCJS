@@ -57,19 +57,18 @@ public class Reservation extends HttpServlet {
 		place = req.getParameter("place");
 		cookies = req.getCookies();
 		
-		boolean found = false;
+		boolean cookieFound = false;
 		if (cookies != null)
 			for (Cookie c : cookies) {
 				if (c.getName().equals("idClient")) {
 					this.idClient = Integer.parseInt(c.getValue());
-					found = true;
-					out.print("<p> Cookie found : "+ c.getValue() +"</p>");
+					cookieFound = true;
 				}
 			}
-		if (!found) {
+		if (!cookieFound) {
 			Random r = new Random();
 			Cookie c = new Cookie("idClient", ""+ r.nextInt(Integer.MAX_VALUE));
-			out.print("<p> Cookie created : "+ c.getValue() +"</p>");
+			res.addCookie(c);
 		}
 		
 		if (representation == null || place == null) {
@@ -164,61 +163,21 @@ public class Reservation extends HttpServlet {
 			noPlace = tab[1];
 			
 			Connection c = null;
-			String noS, noD, prix;
-			int noSerie, noDossier;
 			try {
 				c = BDConnexion.getConnexion("canog", "bd2013");
 				String requete;
 				Statement stmt;
-				ResultSet rs;
 				
-				// on recupere le numero de serie le plus grand pour avoir le suivant
 				stmt = c.createStatement();
-				requete = "select max(noSerie) from lesTickets";
-				rs = stmt.executeQuery(requete);
-				rs.next();
-				noS = rs.getString(1);
-				noSerie = Integer.parseInt(noS);
-				noSerie++;
-				
-				
-				// idem pour le noDossier
-				stmt = c.createStatement();
-				requete = "select max(noDossier) from LesDossiers";
-				rs = stmt.executeQuery(requete);
-				rs.next();
-				noD = rs.getString(1);
-				noDossier = Integer.parseInt(noD);
-				noDossier++;
-				
-				// on recupere le pris de la place voulue
-				stmt = c.createStatement();
-				requete = "select prix from LesCategories where nomC in (" +
-						"select nomC from LesZones where numZ in (" +
-						"select numZ from lesPlaces where (noPlace = 1 AND noRang = 1) ))";
-				rs = stmt.executeQuery(requete);
-				rs.next();
-				prix = rs.getString(1);
-				
-				
-				// on ajoute le dossier dans la base
-				stmt = c.createStatement();
-				requete = "INSERT INTO LesDossiers VALUES ('" + 
-						noDossier +"', '"+ prix +"')";
-				stmt.executeQuery(requete);
-				
-				
-				// on ajoute le nouveau ticket dans la base
-				stmt = c.createStatement();
-				requete = "INSERT INTO LesTickets VALUES ('" + noSerie +
-						"', '"+ numS +"', TO_DATE('" + dateRep +
-						"', 'yyyy/mm/dd hh24:mi'), '"+ noPlace +"', '"+ noRang +"', " +
-						"SYSDATE, '"+ noDossier +"')";
+				requete = "INSERT INTO LesCaddies VALUES ('" + idClient + 
+						"', '" + nomS +"', '"+ numS +"', TO_DATE('" + dateRep +
+						"', 'yyyy/mm/dd hh24:mi'), '"+ noPlace +"', '"+ noRang +"')";
 				stmt.executeQuery(requete);
 				
 				c.commit();
 				
-				out.println("<p>Place " + noPlace + " rang "+ noRang +" réservee avec succès pour le concert de "+ nomS +" le " + dateRep +"</p>");
+				out.println("<p>Place " + noPlace + " rang "+ noRang +" réservee avec succès pour le concert de "+
+						nomS +" le " + dateRep +"</p>");
 				
 				
 			} catch (NullPointerException e){
@@ -240,7 +199,6 @@ public class Reservation extends HttpServlet {
 			}
 		}
 
-		out.println("<hr><p><font color=\"#FFFFFF\"><a href=\"/admin/admin.html\">Page d'administration</a></p>");
 		out.println("<hr><p><font color=\"#FFFFFF\"><a href=\"/index.html\">Page d'accueil</a></p>");
 		out.println("</BODY>");
 		out.close();
