@@ -50,9 +50,9 @@ create table LesTickets (noSerie number (4), numS number (4),
 
 create table LesCaddies (idClient number, nomS varchar2(40), numS number (4),
 		dateRep date, noPlace number (4), noRang number (4),
-      constraint reservations_c1 primary key (numS, dateRep, noPlace, noRang), 
-      constraint reservations_c2 foreign key (numS,dateRep)
+      constraint caddies_c1 primary key (numS, dateRep, noPlace, noRang), 
+      constraint caddies_c2 foreign key (numS,dateRep)
                  references LesRepresentations (numS,dateRep),
-      constraint reservations_c3 foreign key (noPlace,noRang)  
+      constraint caddies_c3 foreign key (noPlace,noRang)  
                  references LesPlaces (noPlace,noRang)
 );
