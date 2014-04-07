@@ -48,7 +48,7 @@ create table LesTickets (noSerie number (4), numS number (4),
                  references LesDossiers (noDossier)
 );
 
-create table LesCaddies (idClient number, numS number (4),
+create table LesCaddies (idClient number, nomS varchar2(40), numS number (4),
 		dateRep date, noPlace number (4), noRang number (4),
       constraint reservations_c1 primary key (numS, dateRep, noPlace, noRang), 
       constraint reservations_c2 foreign key (numS,dateRep)
