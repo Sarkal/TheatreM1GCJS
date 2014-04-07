@@ -45,4 +45,13 @@ create table LesTickets (noSerie number (4), numS number (4),
       constraint tickets_c5 check (dateEmission <= dateRep),
       constraint tickets_c6 foreign key (noDossier)  
                  references LesDossiers (noDossier)
-) ; 
+);
+
+create table LesReservations (idClient number, numS number (4),
+		dateRep date, noPlace number (4), noRang number (4),
+      constraint reservations_c1 primary key (numS, dateRep, noPlace, noRang), 
+      constraint reservations_c2 foreign key (numS,dateRep)
+                 references LesRepresentations (numS,dateRep),
+      constraint reservations_c3 foreign key (noPlace,noRang)  
+                 references LesPlaces (noPlace,noRang)
+);
