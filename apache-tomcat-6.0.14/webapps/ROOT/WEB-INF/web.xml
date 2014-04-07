@@ -65,6 +65,11 @@
 <servlet-class>Reservation</servlet-class> 
 </servlet>
 
+- <servlet> 
+<servlet-name>CaddieServlet</servlet-name> 
+<servlet-class>CaddieServlet</servlet-class> 
+</servlet>
+
 
 
 
@@ -96,6 +101,11 @@
 - <servlet-mapping> 
 <servlet-name>Reservation</servlet-name> 
 <url-pattern>/servlet/Reservation</url-pattern> 
+</servlet-mapping>
+
+- <servlet-mapping> 
+<servlet-name>CaddieServlet</servlet-name> 
+<url-pattern>/servlet/CaddieServlet</url-pattern> 
 </servlet-mapping>
 
 </web-app>

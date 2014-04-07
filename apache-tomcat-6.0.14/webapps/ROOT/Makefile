@@ -4,7 +4,7 @@ LIB=.:../../lib/servlet-api.jar:WEB-INF/lib/jus.util.jar
 COMMAND=javac -d $(DEST) -sourcepath src -classpath $(LIB) $(CATALINA_HOME)/webapps/ROOT/
 SERVLETS=$(P)NouvelleRepresentationServlet.class $(P)ProgrammeServlet.class
 SERVLETS+=$(P)ProgrammeParGroupeServlet.class $(P)PlacesDisponiblesParRepresentation.class
-SERVLETS+=$(P)Reservation.class $(P)RepresentationServlet.class
+SERVLETS+=$(P)Reservation.class $(P)RepresentationServlet.class $(P)CaddieServlet.class
 
 all : $(SERVLETS)
 
@@ -26,4 +26,5 @@ $(P)Reservation.class : src/Reservation.java
 $(P)RepresentationServlet.class : src/RepresentationServlet.java
 	$(COMMAND)$^
 
-
+$(P)CaddieServlet.class : src/CaddieServlet.java
+	$(COMMAND)$^

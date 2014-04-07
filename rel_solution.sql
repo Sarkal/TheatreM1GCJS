@@ -5,6 +5,7 @@ drop table LesSpectacles ;
 drop table LesPlaces ; 
 drop table LesZones ; 
 drop table LesCategories ; 
+drop table LesCaddies ;
  
 create table LesCategories (nomC varchar2(20), prix number (8,2), 
       constraint cat_c1 primary key (nomC), 
@@ -47,7 +48,7 @@ create table LesTickets (noSerie number (4), numS number (4),
                  references LesDossiers (noDossier)
 );
 
-create table LesReservations (idClient number, numS number (4),
+create table LesCaddies (idClient number, numS number (4),
 		dateRep date, noPlace number (4), noRang number (4),
       constraint reservations_c1 primary key (numS, dateRep, noPlace, noRang), 
       constraint reservations_c2 foreign key (numS,dateRep)
