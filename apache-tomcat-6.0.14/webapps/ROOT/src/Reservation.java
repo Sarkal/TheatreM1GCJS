@@ -19,6 +19,8 @@ import exceptions.ExceptionConnexion;
 
 @SuppressWarnings("serial")
 public class Reservation extends HttpServlet {
+	private Cookie [] cookies;
+	private int idClient;
 	private static final String format = "'yyyy/mm/dd HH24:MI'";
 
 	/**
@@ -53,6 +55,22 @@ public class Reservation extends HttpServlet {
 
 		representation = req.getParameter("representation");
 		place = req.getParameter("place");
+		cookies = req.getCookies();
+		
+		boolean found = false;
+		if (cookies != null)
+			for (Cookie c : cookies) {
+				if (c.getName().equals("idClient")) {
+					this.idClient = Integer.parseInt(c.getValue());
+					found = true;
+					out.print("<p> Cookie found : "+ c.getValue() +"</p>");
+				}
+			}
+		if (!found) {
+			Random r = new Random();
+			Cookie c = new Cookie("idClient", ""+ r.nextInt(Integer.MAX_VALUE));
+			out.print("<p> Cookie created : "+ c.getValue() +"</p>");
+		}
 		
 		if (representation == null || place == null) {
 			out.println("<font color=\"#FFFFFF\"> Choisir la repr&eacute;sentation :");
