@@ -1,3 +1,4 @@
+drop table LesCaddies ;
 drop table LesTickets ; 
 drop table LesDossiers;
 drop table LesRepresentations ; 
@@ -5,7 +6,6 @@ drop table LesSpectacles ;
 drop table LesPlaces ; 
 drop table LesZones ; 
 drop table LesCategories ; 
-drop table LesCaddies ;
  
 create table LesCategories (nomC varchar2(20), prix number (8,2), 
       constraint cat_c1 primary key (nomC), 
