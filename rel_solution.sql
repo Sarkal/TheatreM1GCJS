@@ -45,7 +45,7 @@ create table LesTickets (noSerie number (4), numS number (4),
                  references LesPlaces (noPlace,noRang),
       constraint tickets_c5 check (dateEmission <= dateRep),
       constraint tickets_c6 foreign key (noDossier)  
-                 references LesDossiers (noDossier) deferable
+                 references LesDossiers (noDossier) deferrable
 );
 
 create table LesCaddies (idClient number, nomS varchar2(40), numS number (4),
