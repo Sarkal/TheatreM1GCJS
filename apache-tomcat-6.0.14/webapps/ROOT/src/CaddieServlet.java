@@ -199,7 +199,6 @@ public class CaddieServlet extends HttpServlet {
 					rs.next();
 					noS = rs.getString(1);
 					noSerie = Integer.parseInt(noS);
-					noSerie++;
 					
 					
 					// idem pour le noDossier
@@ -235,9 +234,8 @@ public class CaddieServlet extends HttpServlet {
 						rs2.next();
 						prixTotal += Integer.parseInt(rs2.getString(1));
 						
-						out.println("<p>Avant ticket </p>");
-						
 						// on ajoute le nouveau ticket dans la base
+						noSerie++;
 						stmt = c.createStatement();
 						requete = "INSERT INTO LesTickets VALUES ('" + noSerie +
 								"', '"+ numS +"', TO_DATE('" + dateRep +
@@ -245,7 +243,6 @@ public class CaddieServlet extends HttpServlet {
 								"SYSDATE, '"+ noDossier +"')";
 						stmt.executeQuery(requete);
 						
-						out.println("<p>Apres ticket </p>");
 					}
 					out.println("</table>");
 					
@@ -262,8 +259,6 @@ public class CaddieServlet extends HttpServlet {
 					stmt = c.createStatement();
 					requete = "DELETE FROM LesCaddies where (idClient = " + idClient +")";
 					stmt.executeQuery(requete);
-					
-					out.println("<p>Avant commit </p>");
 					
 					c.commit();
 					
