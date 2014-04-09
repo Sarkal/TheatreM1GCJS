@@ -27,7 +27,6 @@ import exceptions.ExceptionConnexion;
  * @author <a href="mailto:Sara.Bouchenak@imag.fr">Sara Bouchenak</a>
  * @version 1.0, 31/10/2007
  */
-
 @SuppressWarnings("serial")
 public class ProgrammeServlet extends HttpServlet {
 

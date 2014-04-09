@@ -61,8 +61,8 @@
 </servlet>
 
 - <servlet> 
-<servlet-name>Reservation</servlet-name> 
-<servlet-class>Reservation</servlet-class> 
+<servlet-name>ReservationServlet</servlet-name> 
+<servlet-class>ReservationServlet</servlet-class> 
 </servlet>
 
 - <servlet> 
@@ -99,8 +99,8 @@
 </servlet-mapping>
 
 - <servlet-mapping> 
-<servlet-name>Reservation</servlet-name> 
-<url-pattern>/servlet/Reservation</url-pattern> 
+<servlet-name>ReservationServlet</servlet-name> 
+<url-pattern>/servlet/ReservationServlet</url-pattern> 
 </servlet-mapping>
 
 - <servlet-mapping> 

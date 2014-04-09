@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import jus.util.IO;
 import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
-
-
+/**
+ * PlacesDisponiblesParRepresentation
+ * Cette servlet permet d'afficher les places disponibles par representation
+ * 
+ * @author Seguin Jeremy, Cano Gregory
+ */
 @SuppressWarnings("serial")
 public class PlacesDisponiblesParRepresentation extends HttpServlet {
 	private static final String format = "'yyyy/mm/dd HH24:MI'";

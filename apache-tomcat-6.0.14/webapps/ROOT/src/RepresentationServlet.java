@@ -14,7 +14,12 @@ import jus.util.IO;
 import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
 
-
+/**
+ * RepresentationServlet
+ * Affiche toutes les representations de tous les groupes
+ * 
+ * @author Seguin Jeremy, Cano Gregory
+ */
 @SuppressWarnings("serial")
 public class RepresentationServlet extends HttpServlet {
 	/**

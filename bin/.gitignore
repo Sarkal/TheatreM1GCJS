@@ -1,7 +1,0 @@
-*.class
-*~
-# Package Files #
-*.war
-*.ear
-*.log
-apache-tomcat-6.0.14/logs/*

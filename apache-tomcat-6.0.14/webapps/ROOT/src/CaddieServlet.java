@@ -16,7 +16,14 @@ import jus.util.IO;
 import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
 
-
+/**
+ * CaddieServlet
+ * Cette servlet sert a recuperer le contenu du caddie et
+ * a l'afficher. Elle permet de retirer un ticket individuellement,
+ * vider le panier complet ou valider la commande.
+ * 
+ * @author Seguin Jeremy, Cano Gregory
+ */
 @SuppressWarnings("serial")
 public class CaddieServlet extends HttpServlet {
 	private Cookie [] cookies;
@@ -124,7 +131,7 @@ public class CaddieServlet extends HttpServlet {
 					}
 						
 	
-					// on récupère le contennu du caddie
+					// on récupère le contenu du caddie
 					stmt = c.createStatement();
 					requete = "select numS, nomS, TO_CHAR(dateRep, "+ format +
 							"), noPlace, noRang from LesCaddies " +

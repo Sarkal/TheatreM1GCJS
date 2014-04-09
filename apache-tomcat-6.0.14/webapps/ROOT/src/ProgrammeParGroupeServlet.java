@@ -14,7 +14,12 @@ import jus.util.IO;
 import accesBD.BDConnexion;
 import exceptions.ExceptionConnexion;
 
-
+/**
+ * ProgrammeParGroupe
+ * Permet de choisir un groupe et d'afficher toutes leurs representations
+ * 
+ * @author Seguin Jeremy, Cano Gregory
+ */
 @SuppressWarnings("serial")
 public class ProgrammeParGroupeServlet extends HttpServlet {
 	private static final String format = "'yyyy/mm/dd HH24:MI'";

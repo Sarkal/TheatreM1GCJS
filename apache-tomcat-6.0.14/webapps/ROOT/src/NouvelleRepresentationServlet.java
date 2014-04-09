@@ -25,7 +25,7 @@ import exceptions.ExceptionConnexion;
 /**
  * NouvelleRepresentation Servlet.
  * 
- * This servlet dynamically adds a new date a show.
+ * This servlet dynamically adds a new date for a show.
  * 
  * @author <a href="mailto:Sara.Bouchenak@imag.fr">Sara Bouchenak</a>
  * @version 1.0, 31/10/2007
