@@ -44,9 +44,6 @@ public class RepresentationServlet extends HttpServlet {
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
 		out.println("<font color=\"#FFFFFF\"><h1> Programme de la saison </h1>");
 
-		// TODO
-		// Recuperation de la liste de tous les spectacles de la saison.
-		// Puis construction dynamique d'une page web decrivant ces spectacles.
 		c = null;
 		try {
 			c = BDConnexion.getConnexion("canog", "bd2013");
@@ -56,6 +53,7 @@ public class RepresentationServlet extends HttpServlet {
 
 			stmt = c.createStatement();
 
+			// on récupère la liste de tous les spectacles de la saison
 			requete = "select nomS, dateRep from LesRepresentations natural join LesSpectacles";
 
 			rs = stmt.executeQuery(requete);

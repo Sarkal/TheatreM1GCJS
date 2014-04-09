@@ -67,6 +67,7 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				ResultSet rs ;
 				stmt = c.createStatement();
 
+				// on affiche la liste des spectacles
 				requete = "select distinct numS, nomS from LesSpectacles order by numS";
 				rs = stmt.executeQuery(requete);
 				out.println("<SELECT name=\"numS\">");
@@ -113,11 +114,12 @@ public class ProgrammeParGroupeServlet extends HttpServlet {
 				
 				out.println("<p>Programmes du groupe "+ nomS +"</p>");
 				
-				// et les dates de représentation
+				// et les dates des représentation
 				stmt = c.createStatement();
 				requete = "select TO_CHAR(dateRep, "+ format +") from LesRepresentations where (numS = "+ numS +")";
 				rs = stmt.executeQuery(requete);
 				
+				// et on affiche avec un lien vers les places disponibles et un bouton pour réserver
 				out.println("<table>");
 				while (rs.next()) {
 					dateRep = rs.getString(1);

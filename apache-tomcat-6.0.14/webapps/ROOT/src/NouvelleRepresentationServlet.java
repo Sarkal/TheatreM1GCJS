@@ -99,6 +99,7 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 				ResultSet rs ;
 				stmt = c.createStatement();
 
+				// on récupère et on affiche la liste des numeros de spectacles
 				requete = "select distinct numS, nomS from LesSpectacles order by numS";
 				rs = stmt.executeQuery(requete);
 				out.println("<SELECT name=\"numS\">");
@@ -125,6 +126,7 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 						IO.println("SQLException");
 					}
 			}
+			// on affiche aussi toutes les informations à récupérer pour le nouveau spectacle
 			out.println("</th>");
 			
 			out.println("</tr>");
@@ -187,13 +189,11 @@ public class NouvelleRepresentationServlet extends HttpServlet {
 				String requete, date;
 				Statement stmt;
 
+				// on insère la nouvelle représentation dans la table
 				date = anneeS +"/" + moisS + "/" + jourS + " " + heureS + ":" + minutesS;
-				
 				stmt = c.createStatement();
-
 				requete = "INSERT INTO LesRepresentations VALUES "
 						+ "('" + numS + "', TO_DATE('" + date + "', 'yyyy/mm/dd hh24:mi'))";
-
 				stmt.executeQuery(requete);
 				c.commit();
 				

@@ -55,9 +55,6 @@ public class ProgrammeServlet extends HttpServlet {
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
 		out.println("<font color=\"#FFFFFF\"><h1> Programme de la saison </h1>");
 
-		// TODO
-		// Recuperation de la liste de tous les spectacles de la saison.
-		// Puis construction dynamique d'une page web decrivant ces spectacles.
 		try {
 			Connection c = BDConnexion.getConnexion("canog", "bd2013");
 			String requete ;
@@ -66,6 +63,8 @@ public class ProgrammeServlet extends HttpServlet {
 			ResultSet rs ;
 			stmt = c.createStatement();
 			
+			// on récupère la liste des dpectacles
+			// et on les affiche avec un lien vers la liste des programmes
 			requete = "select distinct nomS, numS from LesSpectacles order by noms";
 			rs = stmt.executeQuery(requete);
 			out.println("<p> Noms : </p>");

@@ -57,6 +57,7 @@ public class Reservation extends HttpServlet {
 		place = req.getParameter("place");
 		cookies = req.getCookies();
 		
+		// on récupère le cookie "idClient" s'il existe, sinon on le créé
 		boolean cookieFound = false;
 		if (cookies != null)
 			for (Cookie c : cookies) {
@@ -86,6 +87,7 @@ public class Reservation extends HttpServlet {
 
 				ResultSet rs ;
 				stmt = c.createStatement();
+				// on racumère la liste des représentations et on l'affiche
 				requete = "select nomS, numS, TO_CHAR(dateRep, "+ format +") from LesRepresentations natural join LesSpectacles";
 				rs = stmt.executeQuery(requete);
 				out.println("<select name=\"representation\">");
@@ -97,12 +99,14 @@ public class Reservation extends HttpServlet {
 				}
 				out.println("</select>");
 				
+				// si une représentation a été sélectionnée
 				if (place == null && representation != null) {
 					tab = representation.split("::");
 					numS = tab[0];
 					dateRep = tab[1];
 					nomS = tab[2];
 					
+					// on affiche aussi la liste des places disponibles
  					stmt = c.createStatement();
 					requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +
 							" from LesTickets where (numS = "+ numS +
@@ -152,7 +156,7 @@ public class Reservation extends HttpServlet {
 			out.println("<input type=submit>");
 			out.println("</form>");
 
-		} else {
+		} else { // cas ou la représentation et la place sont sélectionnés
 			tab = representation.split("::");
 			numS = tab[0];
 			dateRep = tab[1];
@@ -168,6 +172,7 @@ public class Reservation extends HttpServlet {
 				String requete;
 				Statement stmt;
 				
+				// on insère dans la tabble Caddie ne nouveau ticket
 				stmt = c.createStatement();
 				requete = "INSERT INTO LesCaddies VALUES ('" + idClient + 
 						"', '" + nomS +"', '"+ numS +"', TO_DATE('" + dateRep +

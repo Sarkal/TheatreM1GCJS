@@ -64,6 +64,7 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				String requete ;
 				Statement stmt ;
 
+				// on affiche la liste des représentations
 				ResultSet rs ;
 				stmt = c.createStatement();
 				requete = "select nomS, numS, TO_CHAR(dateRep, "+ format +") from LesRepresentations natural join LesSpectacles";
@@ -110,7 +111,7 @@ public class PlacesDisponiblesParRepresentation extends HttpServlet {
 				nomS = tab[2];
 				
 				
-				
+				// on affiche la liste des places pour la représentation
 				out.println("<p>Paces pour le spectacle de "+ nomS +" le "+ dateRep +"</p>");
 				stmt = c.createStatement();
 				requete = "select noPlace, noRang from LesPlaces minus select noPlace, noRang" +

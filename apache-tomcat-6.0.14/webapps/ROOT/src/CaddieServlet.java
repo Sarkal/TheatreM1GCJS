@@ -54,9 +54,12 @@ public class CaddieServlet extends HttpServlet {
 		out.println("<BODY bgproperties=\"fixed\" background=\"/images/rideau.JPG\">");
 		out.println("<font color=\"#FFFFFF\"><h1> Votre Caddie </h1>");
 
+		// on récupère les parametres et les cookies
 		command = req.getParameter("command");
 		cookies = req.getCookies();
 		
+		// on parcours les cookies
+		// si on a un cookie idClient, on récupère sa valeur
 		boolean cookieFound = false;
 		if (cookies != null)
 			for (Cookie c : cookies) {
@@ -65,19 +68,22 @@ public class CaddieServlet extends HttpServlet {
 					cookieFound = true;
 				}
 			}
-		if (!cookieFound) {
+		if (!cookieFound) { // sinon, on le cree
 			Random r = new Random();
 			Cookie c = new Cookie("idClient", ""+ r.nextInt(Integer.MAX_VALUE));
 			res.addCookie(c);
 		}
 		
+		// si l'argument command existe, on le coupe
 		if (command != null)
 			tab = command.split("::");
 		else
 			tab = null;
 		
+		// afficher le caddie (pas de commande ou suppression de ticket)
 		if (command == null || tab[0].equals("del")) {
 			
+			// si on a créé le cookie, le pannier est vide
 			if (!cookieFound)
 				out.println("<p>Votre panier est vide</p>");
 			else {
@@ -90,6 +96,7 @@ public class CaddieServlet extends HttpServlet {
 					Statement stmt ;
 					ResultSet rs ;
 					
+					// cas de suppression de caddie
 					if (tab != null && tab[0].equals("del")) {
 						// si on a demandé à supprimer tout le caddie
 						if (tab[1].equals("*")) {
@@ -97,7 +104,7 @@ public class CaddieServlet extends HttpServlet {
 							requete = "DELETE FROM LesCaddies where (idClient = " + idClient +")";
 							stmt.executeQuery(requete);
 						}
-						else {
+						else { // sinon on a demmandé à supprimer une place
 							nomS = tab[1];
 							numS = tab[2];
 							dateRep = tab[3];
@@ -117,14 +124,14 @@ public class CaddieServlet extends HttpServlet {
 					}
 						
 	
-					
+					// on récupère le contennu du caddie
 					stmt = c.createStatement();
 					requete = "select numS, nomS, TO_CHAR(dateRep, "+ format +
 							"), noPlace, noRang from LesCaddies " +
 							"where idClient = " + idClient;
 					rs = stmt.executeQuery(requete);
 					
-					
+					// et on l'affiche
 					out.println("<table>");
 					while (rs.next()) {
 						nbPlaces++;
@@ -163,6 +170,8 @@ public class CaddieServlet extends HttpServlet {
 						}
 				}
 				
+				// on affiche les boutons "valider la commande" et "vider le caddie"
+				// uniquement si le caddie n'est pas vide
 				if (nbPlaces != 0) {
 					out.print("<form action=\"CaddieServlet\" method=POST>");
 					out.println("<INPUT type=\"hidden\" value=\"del::*\" name=\"command\">");
@@ -178,7 +187,7 @@ public class CaddieServlet extends HttpServlet {
 					out.println("<p>Votre panier est vide</p>");
 			}
 
-		} else {
+		} else { // cas de la validation du caddie			
 			if (tab[0].equals("valider")) {
 			
 				Connection c = null;
@@ -210,13 +219,14 @@ public class CaddieServlet extends HttpServlet {
 					noDossier = Integer.parseInt(noD);
 					noDossier++;
 					
-					// pour chaque place dans le caddie
+					// on récupère les places dans le caddie
 					stmt = c.createStatement();
 					requete = "select numS, nomS, TO_CHAR(dateRep, "+ format +
 							"), noPlace, noRang from LesCaddies " +
 							"where idClient = " + idClient;
 					rs = stmt.executeQuery(requete);
 					
+					// pour chaque place dans le caddie
 					while (rs.next()) {
 						nbPlaces++;
 						numS = rs.getString(1);
